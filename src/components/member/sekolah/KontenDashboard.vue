@@ -47,48 +47,7 @@
               <span v-if="harian.waktu_pulang != 0" bgcolor="green" style="text-align:center">
                 <a class="ui green large label">{{harian.waktu_pulang}}</a>                
               </span>
-
-              <!-- <table style="width:100%;">
-                <tr>
-                  <td>
-                    Datang
-                  </td>                  
-                  <td v-if="harian.waktu_datang == 0" bgcolor="red" class="white-text" style="text-align:center">
-                    Alpa
-                  </td>  
-                  <td v-if="harian.waktu_datang != 0" bgcolor="green" class="white-text" style="text-align:center">
-                    {{harian.waktu_datang}}
-                  </td>                  
-                </tr> 
-                <tr>
-                  <td>
-                    Pulang
-                  </td>                  
-                  <td v-if="harian.waktu_pulang == 0" bgcolor="red" class="white-text" style="text-align:center">
-                    Alpa
-                  </td>  
-                  <td v-if="harian.waktu_pulang != 0" bgcolor="green" class="white-text" style="text-align:center">
-                    {{harian.waktu_pulang}}
-                  </td>                  
-                </tr>                
-              </table> -->
-              </td>
-              <!-- <div class="ui list">
-                <div class="item">
-                  <div class="item">Datang:</div>
-                  <span v-if="harian.waktu_datang == 0" class="ui red horizontal label">Alpa</span>
-                  <span v-else-if="harian.waktu_datang != 0" class="ui green horizontal label">
-                    {{harian.waktu_datang}}
-                  </span>
-                </div>
-                <div class="item">
-                  <div class="item">Pulang:</div>
-                  <span v-if="harian.waktu_pulang == 0" class="ui red horizontal label">Alpa</span>
-                  <span v-else-if="harian.waktu_pulang != 0" class="ui green horizontal label">
-                    {{harian.waktu_pulang}}
-                  </span>
-                </div>                
-              </div>  -->             
+            </td>                           
             <td v-if="harian.waktu_datang == 0 && harian.waktu_pulang == 0 " bgcolor="red" style="text-align:center"> 
               <span class="white-text">Alpa</span>            
             </td>
@@ -106,16 +65,7 @@
             </td>
             <td style="text-align:center" v-if="$session.get('user_role') ===2"> 
               <a href="#" v-if="harian.rfid != 0" v-on:click="show_update_form_absent(harian.nama_lengkap,harian.waktu_datang,harian.waktu_pulang,harian.rfid)">Ubah Status</a>              
-              <span v-else-if="harian.rfid == 0">RFID belum terdaftar</span>              
-              <!-- 
-                ubah_status_absen_form(harian._id,harian.rfid,harian.nama_lengkap)
-                <div class="ui form">
-                <div class="field">                  
-                  <select class="ui search dropdown">
-                    <option value="">Ubah Status</option>
-                  </select>
-                </div>
-              </div> -->
+              <span v-else-if="harian.rfid == 0">RFID belum terdaftar</span>                            
             </td>
           </tr>          
         </tbody>

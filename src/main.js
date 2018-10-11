@@ -13,6 +13,7 @@ import Datepicker from 'vuejs-datepicker';
 //Import CSS dan JS
 
 import 'jquery/dist/jquery.min.js'
+//import 'jquery-ui/build/release.js'
 import 'semantic-ui/dist/semantic.min.js'
 import 'semantic-ui/dist/semantic.min.css'
 import socketio from 'socket.io-client';

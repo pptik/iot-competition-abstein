@@ -50,7 +50,7 @@
         </select>                   
       </div>
       <a href="#"id="button-export-table"  v-on:click.prevent="export_tabel" style="margin-top:1em;"> <i class="download icon"></i> Unduh Data Absensi</a>       
-     <table class="ui celled table grey-text" id="absensi-harian">
+     <table class="ui celled table grey-text" id="tabel-unduh-data-absensi-1">
         <!-- <caption>Absensi {{this_date}} {{this_month}} {{this_year}} </caption> -->
         <thead>
           <tr>
@@ -154,21 +154,62 @@
         </tbody>
       </table>
     </div>    
-    <div class="ui bottom attached tab segment" data-tab="thrid">
-      Absensi dari bulan
-      <select class="ui dropdown" v-model="select_month_get_absen">
-          <!-- <option v-for="index in 31" :key="index" :value="index">{{index}}</option>           -->
-          <option v-for="month,index in monthCollections" :value="month">{{month}}</option>
-       </select>
-       2018, sampai dengan bulan
-       <select class="ui dropdown" v-model="select_month_get_absen">
-          <option v-for="month,index in monthCollections" :value="month">{{month}}</option>
-       </select>
-       {{this_year}}
-       
-       <button type="button"
-                    style="margin-top:1em;background: linear-gradient(141deg, #2ecc71 10%, #27ae60 51%, #27ae60 75%);color:#FFFFFF;"
-                    class="medium ui button button-submit">Sedang dalam pengembangan...</button>
+    <div class="ui bottom attached tab segment" data-tab="thrid">             
+      <!-- <div class="ui left icon input">
+        <input type="text" placeholder="Pilih tanggal" id="datepicker">
+        <i class="calendar alternate outline icon"></i>
+      </div> -->
+      <datepicker v-model="datepickerrekapitulasi" input-class="ui input" placeholder="Pilih tanggal" class="ui input" @closed="downloadRekapitulasi()"></datepicker>
+       <button type="button" id="tombol-unduh-data-absensi"
+                    style="margin-top:1em;background: linear-gradient(141deg, #2ecc71 10%, #27ae60 51%, #27ae60 75%);color:#FFFFFF;display:none;"
+                    class="medium ui button button-submit" v-on:click.prevent="export_tabel_rekapitulasi">Unduh data absensi</button>
+      <table class="ui celled table grey-text" id="tabel-unduh">
+        <tr>
+          <th>No</th>
+          <th>Nama Siswa</th>
+          <th>Kelas</th>
+          <th>Waktu</th>
+          <th>Status</th>
+        </tr>
+        <tr v-for="sharian,index in sekolah_harian_rekapitulasi">
+          <td>{{index+1}}</td>
+          <td>{{sharian.nama_lengkap}}</td>
+          <td>{{sharian.nama_kelas}}</td>
+          <td>
+             Datang:
+            <span v-if="sharian.waktu_datang == 0" bgcolor="red" style="text-align:center">
+                  <a class="ui red large label">Alpa</a>
+            </span>  
+            <span v-if="sharian.waktu_datang != 0" bgcolor="green" style="text-align:center">                
+              <a class="ui green large label">{{sharian.waktu_datang}}</a>
+            </span>
+            <br/>
+            <br/>
+            Pulang:
+            <span v-if="sharian.waktu_pulang == 0" bgcolor="red" style="text-align:center">
+                  <a class="ui red large label">Alpa</a>
+            </span>  
+            <span v-if="sharian.waktu_pulang != 0" bgcolor="green" style="text-align:center">
+              <a class="ui green large label">{{sharian.waktu_pulang}}</a>                
+            </span>
+          </td>
+           <td v-if="sharian.waktu_datang == 0 && sharian.waktu_pulang == 0 " bgcolor="red" style="text-align:center"> 
+              <span class="white-text">Alpa</span>            
+            </td>
+            <td v-if="sharian.waktu_datang != 0 && sharian.waktu_pulang != 0" bgcolor="green" style="text-align:center">  
+              <span class="white-text">Hadir</span>            
+            </td>            
+            <td v-if="sharian.status == 2" bgcolor="orange" style="text-align:center">  
+              <span class="white-text">Izin</span>
+            </td>
+            <td v-if="sharian.status == 3" bgcolor="purple" style="text-align:center">
+              <span class="white-text">Sakit</span>
+            </td>
+            <td v-if="sharian.waktu_datang != 0 && sharian.waktu_pulang == 0" bgcolor="grey" style="text-align:center">                                                        
+              <span class="white-text">Tidak Lengkap</span>  
+            </td>
+        </tr>
+      </table>
     </div>
     <!-- <div class="ui bottom attached tab segment grey-text" data-tab="fourth">
       Registrasi dilakukan untuk daftar Siswa dan Perbaharuan data kartu RFID.
@@ -281,7 +322,8 @@
   import moment from 'moment/moment'
   import Swal from 'sweetalert2'
   import table_export from 'tableexport'
-
+  //import 'jquery-ui/build/release.js'
+  import datepicker from 'vuejs-datepicker'
   
   export default {
     name: "konten",
@@ -317,7 +359,12 @@
         select_date_get_absen: null,
         select_month_get_absen: null,
         monthCollections: [],
-        image: null
+        image: null,
+        datepickerrekapitulasi: null,
+        daterekapitulasi: null,
+        sekolah_harian: [],
+        sekolah_harian_rekapitulasi: []
+        //datepickerrekapitulasi: new Date().toISOString()
       }
     },
     created() {
@@ -339,8 +386,48 @@
       //this.get_absen_kelas_harian()
       $("#button-export-table").css('display','none')
       this.get_date_collections()
+
+      //$( "#datepicker" ).datepicker();
+      
     },
     methods: {
+      downloadRekapitulasi: function(){
+        let dateSplitter = this.datepickerrekapitulasi.toISOString().split("T")        
+        let dateAdjusted = dateSplitter[0]+"T00:00:00.000+0000"
+        this.daterekapitulasi = dateSplitter[0]
+        let vue = this
+
+        this.$http.post(global_json.general_url+'/absen/sekolah/harian',{
+          sekolah_id:this.$session.get('id_sekolah'),
+          //date_time:moment().get('year')+"-"+(moment().get('month')+1)+"-"+moment().get('date')+"T00:00:00.000+0000"
+          date_time:dateAdjusted
+        }).then(function (data) {
+          if(data.body.success == true){   
+              vue.sekolah_harian_rekapitulasi = []           
+              var results = data.body.data; 
+              //console.log("BISMILLAH: "+JSON.stringify(results))
+              for(let counter=0;counter<results.length;counter++){
+                if(results[counter].waktu_datang != 0 || results[counter].waktu_pulang != 0){
+                  results[counter].waktu_datang = moment(results[counter].waktu_datang).format('HH.mm.ss')                  
+                }
+                if(results[counter].waktu_pulang != 0){                  
+                  results[counter].waktu_pulang = moment(results[counter].waktu_pulang).format('HH.mm.ss')
+                }
+                
+                vue.sekolah_harian_rekapitulasi.push(results[counter])
+              }
+              //$("#tabel-unduh-data-absensi").css("display","block") 
+              //$("#tombol-unduh-data-absensi").css("display","block") TOMBOL UNDUH TABEL REKAPITULASI
+
+              
+          }else if(data.body.success == false){
+            //var pesan = data.body.message;             
+          }
+        });
+
+
+        //$("#button-unduh-rekapitulasi").css("display","block")
+      },
       unggahDaftarSiswa: function(){
         console.log("unggah")
       },
@@ -363,9 +450,22 @@
       export_tabel: function(){
         this.this_class = $("#select-kelas option:selected").text();
         let vue = this
-        table_export(document.getElementsByTagName("table"),{          
+        table_export(document.getElementById("tabel-unduh-data-absensi-1"),{          
           formats: ['xlsx', 'csv'],            // (String[]), filetype(s) for the export, (default: ['xlsx', 'csv', 'txt'])
           filename: 'Absensi '+vue.this_date+' '+vue.this_month+' '+vue.this_year+' '+vue.this_class,                             // (id, String), filename for the downloaded file, (default: 'id')          
+          exportButtons: true,                        // (Boolean), automatically generate the built-in export buttons for each of the specified formats (default: true)
+          position: 'bottom',                         // (top, bottom), position of the caption element relative to table, (default: 'bottom')
+          ignoreRows: null,                           // (Number, Number[]), row indices to exclude from the exported file(s) (default: null)
+          ignoreCols: null,                           // (Number, Number[]), column indices to exclude from the exported file(s) (default: null)
+          trimWhitespace: true                        // (Boolean), remove all leading/trailing newlines, spaces, and tabs from cell text in the exported file(s) (default: false)
+        })
+      },
+       export_tabel_rekapitulasi: function(){
+        //this.this_class = $("#select-kelas option:selected").text();
+        let vue = this
+        table_export(document.getElementById("tabel-unduh"),{          
+          formats: ['xlsx', 'csv'],            // (String[]), filetype(s) for the export, (default: ['xlsx', 'csv', 'txt'])
+          filename: 'Absensi '+vue.daterekapitulasi,                             // (id, String), filename for the downloaded file, (default: 'id')          
           exportButtons: true,                        // (Boolean), automatically generate the built-in export buttons for each of the specified formats (default: true)
           position: 'bottom',                         // (top, bottom), position of the caption element relative to table, (default: 'bottom')
           ignoreRows: null,                           // (Number, Number[]), row indices to exclude from the exported file(s) (default: null)
