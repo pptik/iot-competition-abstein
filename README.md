@@ -9,6 +9,8 @@ Selamat datang pada halaman petunjuk penggunaan kostumisasi Website Absensi untu
 3. Import hasil poin no 2 ke aplikasi POSTMAN.
 4. Setelah berhasil diimport perhatikan deskiprsi dari masing-masing API dan parameter untuk dipergunakan pada website.
 5. Kostumisasi website dengan menggunakan template pada repository ini dengan API yang ada. (Mencangkup desain dan penyajian data).
+6. Akun sekolah dibuatkan oleh pihak ITB.
+7. Format pendaftaran siswa diberikan oleh pihak ITB.
 
 
 ## 5.1 Cara menjalankan template website
