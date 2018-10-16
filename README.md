@@ -12,9 +12,10 @@ Selamat datang pada halaman petunjuk penggunaan kostumisasi Website Absensi untu
 
 ## 5.1 Cara menjalankan template website
 ``` bash
-1. Buka CMD atau command prompt di komputer/laptop
-2. Arahkan ke lokasi direktori template projek 
-3. Lalu jalankan perintah:
+1. Donwload dan Install Node JS di https://nodejs.org/en/download/
+2. Buka CMD atau command prompt di komputer/laptop
+3. Arahkan ke lokasi direktori template projek 
+4. Lalu jalankan perintah:
 
 # Untuk menginstall libray
 npm install
