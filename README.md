@@ -28,7 +28,7 @@ npm run build
 ```
 
 ## Keterangan
-1. Akun sekolah dibuatkan oleh pihak ITB.
+1. Akun sekolah dibuatkan oleh pihak ITB, daftar akun yang sudah dibuatkan: https://drive.google.com/file/d/1MdXQqDWoKo1GHqCvkdoeIGMYGRwBc9S8/view?usp=sharing .
 2. Format pendaftaran siswa diberikan oleh pihak ITB.
 3. Contoh Format pendafaran siswa: https://drive.google.com/file/d/1Tvd3hf7bb-ZNWet0GZQNtCgRSTJKKT5R/view?usp=sharing
 4. Contoh Format pendaftaran RFID:
