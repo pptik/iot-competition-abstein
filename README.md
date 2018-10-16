@@ -29,3 +29,6 @@ npm run build
 ## Keterangan
 1. Akun sekolah dibuatkan oleh pihak ITB.
 2. Format pendaftaran siswa diberikan oleh pihak ITB.
+3. Contoh Format pendafaran siswa: https://drive.google.com/file/d/1Tvd3hf7bb-ZNWet0GZQNtCgRSTJKKT5R/view?usp=sharing
+4. Contoh Format pendaftaran RFID:
+https://drive.google.com/file/d/1a_TQK_r3cdXtFrDsvKohdlHklz7W8U0T/view?usp=sharing
