@@ -24,8 +24,8 @@ npm install
 npm run dev
 
 ```
-5. Lihat hasil menjalankan perintah di web browser dengan alamat localhost:8080(menyesuaikan dengan hasil keluaran di layar terminal)
-6. Apabila konstumisasi website selesai dan ingin dihostingkan maka perlu dilakukan proses build dengan menjalankan perintah:
+8. Lihat hasil menjalankan perintah di web browser dengan alamat localhost:8080(menyesuaikan dengan hasil keluaran di layar terminal)
+9. Apabila konstumisasi website selesai dan ingin dihostingkan maka perlu dilakukan proses build dengan menjalankan perintah:
 
 ```
 npm run build
