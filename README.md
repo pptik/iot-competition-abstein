@@ -30,7 +30,7 @@ npm run dev
 ```
 npm run build
 ```
-7. Silahkan hubungi panitia untuk keperluan hosting website.
+10. Silahkan hubungi panitia untuk keperluan hosting website.
 
 ## Keterangan
 1. Contoh Format pendafaran Siswa: https://drive.google.com/file/d/1Tvd3hf7bb-ZNWet0GZQNtCgRSTJKKT5R/view?usp=sharing
