@@ -23,13 +23,16 @@ npm install
 # Untuk menjalankan versi development localhost:8080
 npm run dev
 
-# Untuk membuat versi produksi yang nanti nya ada di folder build
+```
+5. Lihat hasil menjalankan perintah di web browser dengan alamat localhost:8080
+6. Apabila konstumisasi website selesai dan ingin dihostingkan maka perlu dilakukan proses build dengan menjalankan perintah:
+
+```
 npm run build
 ```
 
 ## Keterangan
-1. Akun sekolah dibuatkan oleh pihak ITB, daftar akun yang sudah dibuatkan: https://drive.google.com/file/d/1MdXQqDWoKo1GHqCvkdoeIGMYGRwBc9S8/view?usp=sharing .
-2. Format pendaftaran Siswa dan RFID diberikan oleh pihak ITB.
-3. Contoh Format pendafaran Siswa: https://drive.google.com/file/d/1Tvd3hf7bb-ZNWet0GZQNtCgRSTJKKT5R/view?usp=sharing
-4. Contoh Format pendaftaran RFID:
+1. Contoh Format pendafaran Siswa: https://drive.google.com/file/d/1Tvd3hf7bb-ZNWet0GZQNtCgRSTJKKT5R/view?usp=sharing
+2. Contoh Format pendaftaran RFID:
 https://drive.google.com/file/d/1a_TQK_r3cdXtFrDsvKohdlHklz7W8U0T/view?usp=sharing
+3. Kirim email ke itb.pptik@gmail.com dengan subjek: Pendaftaran Siswa RFID Absensi Sekolah (Nama Sekolah Anda)
