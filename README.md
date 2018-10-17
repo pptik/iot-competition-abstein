@@ -1,6 +1,6 @@
 # Pendahuluan
 
-Selamat datang pada halaman petunjuk penggunaan kostumisasi Website Absensi untuk keperluan lomba IoT SMK. Tekan tombol unduh berwarna hijau di atas kanan untuk menggunakan project template ini.
+Selamat datang pada halaman petunjuk penggunaan kostumisasi Website Absensi untuk keperluan lomba IoT SMK. Silahkan ikuti step by step di bawah untuk memulai kostumisasi
 
 # Step by step penggunaan
 
