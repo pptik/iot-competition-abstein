@@ -26,7 +26,7 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VueSession);
 Vue.use(VModal);
-Vue.use(VueSocketio, socketio('http://167.205.7.226:9097/'));
+Vue.use(VueSocketio, socketio('http://167.205.7.226:9099/'));
 
 Vue.component('hak-cipta',HakCipta)
 Vue.component('datepicker',Datepicker)
